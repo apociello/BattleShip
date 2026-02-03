@@ -1,6 +1,6 @@
 class Board {
   constructor() {
-    this.board = Array.from({ length: 10 }, () => Array(10).fill(" "));
+    this.board = Array.from({ length: 10 }, () => Array(10).fill(' '));
   }
 
   placeShip(ship, coordinate, axis) {
@@ -11,16 +11,24 @@ class Board {
       coordinate.y > 9
     )
       return;
-    if (axis === "x" && coordinate.y + (ship.size - 1) > 9) return;
-    if (axis === "y" && coordinate.x - (ship.size - 1) < 0) return;
+    if (axis === 'x' && coordinate.y + (ship.size - 1) > 9) return;
+    if (axis === 'y' && coordinate.x - (ship.size - 1) < 0) return;
 
-    if (axis === "x") {
+    if (axis === 'x') {
       for (let i = 0; i < ship.size; i++) {
-        this.board[coordinate.x][coordinate.y + i] = "O";
+        if (this.board[coordinate.x][coordinate.y + i] === 'O') return;
       }
-    } else if (axis === "y") {
+
       for (let i = 0; i < ship.size; i++) {
-        this.board[coordinate.x - i][coordinate.y] = "O";
+        this.board[coordinate.x][coordinate.y + i] = 'O';
+      }
+    } else if (axis === 'y') {
+      for (let i = 0; i < ship.size; i++) {
+        if (this.board[coordinate.x - i][coordinate.y] === 'O') return;
+      }
+
+      for (let i = 0; i < ship.size; i++) {
+        this.board[coordinate.x - i][coordinate.y] = 'O';
       }
     }
   }
