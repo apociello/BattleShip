@@ -61,5 +61,24 @@ describe('Board', () => {
       expect(board.board[10]).toBe(undefined);
       expect(board.board[9][2]).toBe(' ');
     });
+
+    test('ships are correctly placed', () => {
+      const board = new Board();
+      board.placeShip(new Ship(2), { x: 7, y: 3 }, 'x');
+      board.placeShip(new Ship(2), { x: 9, y: 7 }, 'y');
+      expect(board.board[7][3]).toBe('O');
+      expect(board.board[7][4]).toBe('O');
+      expect(board.board[9][7]).toBe('O');
+      expect(board.board[8][7]).toBe('O');
+    });
+
+    test('ships overlap', () => {
+      const board = new Board();
+      board.placeShip(new Ship(2), { x: 1, y: 2 }, 'x');
+      board.placeShip(new Ship(2), { x: 2, y: 3 }, 'y');
+      expect(board.board[1][2]).toBe('O');
+      expect(board.board[1][3]).toBe('O');
+      expect(board.board[2][3]).toBe(' ');
+    });
   });
 });
