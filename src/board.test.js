@@ -14,6 +14,21 @@ describe('Board', () => {
   });
 
   describe('placeShip', () => {
+    test('coordinate values are passed to ship', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 1, y: 2 }, 'x');
+      expect(ship1.coordinates[0]).toEqual({ x: 1, y: 2 });
+      expect(ship1.coordinates[1]).toEqual({ x: 1, y: 3 });
+    });
+
+    test('ship is added to board ships', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 1, y: 2 }, 'x');
+      expect(board.ships.length).toEqual(1);
+    })
+
     test('ship is correctly placed (x axis)', () => {
       const board = new Board();
       board.placeShip(new Ship(2), { x: 7, y: 3 }, 'x');
@@ -72,7 +87,7 @@ describe('Board', () => {
       expect(board.board[8][7]).toBe('O');
     });
 
-    test('ships overlap', () => {
+    test("ships don't overlap", () => {
       const board = new Board();
       board.placeShip(new Ship(2), { x: 1, y: 2 }, 'x');
       board.placeShip(new Ship(2), { x: 2, y: 3 }, 'y');
