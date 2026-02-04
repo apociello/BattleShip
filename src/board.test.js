@@ -27,7 +27,7 @@ describe('Board', () => {
       const ship1 = new Ship(2);
       board.placeShip(ship1, { x: 1, y: 2 }, 'x');
       expect(board.ships.length).toEqual(1);
-    })
+    });
 
     test('ship is correctly placed (x axis)', () => {
       const board = new Board();
@@ -94,6 +94,77 @@ describe('Board', () => {
       expect(board.board[1][2]).toBe('O');
       expect(board.board[1][3]).toBe('O');
       expect(board.board[2][3]).toBe(' ');
+    });
+  });
+
+  describe('recieveAttack', () => {
+    test('hit increases 1', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 1, y: 2 }, 'x');
+      board.receiveAttack({ x: 1, y: 3 });
+      expect(ship1.hits).toBe(1);
+    });
+
+    test('miss increases 0', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 1, y: 2 }, 'x');
+      board.receiveAttack({ x: 7, y: 5 });
+      expect(ship1.hits).toBe(0);
+    });
+
+    test('2 hits and 1 miss increase 2', () => {
+      const board = new Board();
+      const ship1 = new Ship(4);
+      board.placeShip(ship1, { x: 9, y: 7 }, 'y');
+      board.receiveAttack({ x: 6, y: 7 });
+      board.receiveAttack({ x: 4, y: 1 });
+      board.receiveAttack({ x: 8, y: 7 });
+      expect(ship1.hits).toBe(2);
+    });
+
+    test('2 hits in the same position -> totals 1 hit', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 4, y: 5 }, 'x');
+      board.receiveAttack({ x: 4, y: 5 });
+      board.receiveAttack({ x: 4, y: 5 });
+      expect(ship1.hits).toBe(1);
+    });
+
+    test('board records all shots', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 0, y: 0 }, 'x');
+      board.receiveAttack({ x: 0, y: 0 });
+      board.receiveAttack({ x: 7, y: 8 });
+      expect(board.shots[0]).toEqual({ x: 0, y: 0 });
+      expect(board.shots[1]).toEqual({ x: 7, y: 8 });
+    });
+  });
+
+  describe('allSunk', () => {
+    test('all ships sunk return 1', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      const ship2 = new Ship(3);
+      board.placeShip(ship1, { x: 0, y: 0 }, 'x');
+      board.placeShip(ship2, { x: 4, y: 0 }, 'y');
+      board.receiveAttack({ x: 0, y: 0 });
+      board.receiveAttack({ x: 0, y: 1 });
+      board.receiveAttack({ x: 4, y: 0 });
+      board.receiveAttack({ x: 3, y: 0 });
+      board.receiveAttack({ x: 2, y: 0 });
+
+      expect(board.allSunk()).toBe(1);
+    });
+
+    test('all ships not sunk return 0', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 0, y: 0 }, 'x');
+      expect(board.allSunk()).toBe(0);
     });
   });
 });
