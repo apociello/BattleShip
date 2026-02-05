@@ -1,5 +1,5 @@
-import Board from './board';
-import Ship from './ship';
+import Board from '../classes/board';
+import Ship from '../classes/ship';
 
 describe('Board', () => {
   test("each box starts with ' ' value", () => {
