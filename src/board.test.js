@@ -139,8 +139,8 @@ describe('Board', () => {
       board.placeShip(ship1, { x: 0, y: 0 }, 'x');
       board.receiveAttack({ x: 0, y: 0 });
       board.receiveAttack({ x: 7, y: 8 });
-      expect(board.shots[0]).toEqual({ x: 0, y: 0 });
-      expect(board.shots[1]).toEqual({ x: 7, y: 8 });
+      expect(board.board[0][0]).toBe('X');
+      expect(board.board[7][8]).toBe('-');
     });
   });
 

@@ -2,7 +2,6 @@ class Board {
   constructor() {
     this.board = Array.from({ length: 10 }, () => Array(10).fill(' '));
     this.ships = [];
-    this.shots = [];
   }
 
   placeShip(ship, coordinate, axis) {
@@ -40,26 +39,26 @@ class Board {
   }
 
   receiveAttack(coordinate) {
-    for (let i = 0; i < this.shots.length; i++) {
-      if (coordinate.x === this.shots[i].x && coordinate.y === this.shots[i].y)
-        return;
-    }
+    if (
+      this.board[coordinate.x][coordinate.y] !== ' ' &&
+      this.board[coordinate.x][coordinate.y] !== 'O'
+    )
+      return;
 
-    let hit = 0;
-    for (let i = 0; i < this.ships.length && !hit; i++) {
+    for (let i = 0; i < this.ships.length; i++) {
       for (let j = 0; j < this.ships[i].size; j++) {
         if (
           coordinate.x === this.ships[i].coordinates[j].x &&
           coordinate.y === this.ships[i].coordinates[j].y
         ) {
           this.ships[i].hit();
-          hit = 1;
-          break;
+          this.board[coordinate.x][coordinate.y] = 'X';
+          return;
         }
       }
     }
 
-    this.shots.push(coordinate);
+    this.board[coordinate.x][coordinate.y] = '-';
   }
 
   allSunk() {
