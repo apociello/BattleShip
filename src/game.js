@@ -21,7 +21,7 @@ player2.board.placeShip(new Ship(2), { x: 8, y: 4 }, 'x'); // Destroyer
 player1.board.receiveAttack({ x: 0, y: 2 });
 player2.board.receiveAttack({ x: 3, y: 3 });
 
-function renderBoard() {
+function renderP1Board() {
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       const cell = document.createElement('div');
@@ -30,7 +30,9 @@ function renderBoard() {
       player1Board.append(cell);
     }
   }
+}
 
+function renderP2Board() {
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       const cell = document.createElement('div');
@@ -41,4 +43,4 @@ function renderBoard() {
   }
 }
 
-export default renderBoard;
+export { renderP1Board, renderP2Board };

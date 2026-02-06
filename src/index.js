@@ -1,4 +1,5 @@
 import './style.css';
-import renderPlayer1Board from './game';
+import { renderP1Board, renderP2Board } from './game';
 
-renderPlayer1Board();
+renderP1Board();
+renderP2Board();
