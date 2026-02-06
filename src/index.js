@@ -1,3 +1,4 @@
-import "./style.css";
+import './style.css';
+import renderPlayer1Board from './game';
 
-console.log("Template Repository");
+renderPlayer1Board();
