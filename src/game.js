@@ -18,26 +18,49 @@ player2.board.placeShip(new Ship(3), { x: 0, y: 5 }, 'x'); // Crusier
 player2.board.placeShip(new Ship(3), { x: 6, y: 2 }, 'y'); // Submarine
 player2.board.placeShip(new Ship(2), { x: 8, y: 4 }, 'x'); // Destroyer
 
-player1.board.receiveAttack({ x: 0, y: 2 });
-player2.board.receiveAttack({ x: 3, y: 3 });
-
 function renderP1Board() {
+  player1Board.textContent = '';
+
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       const cell = document.createElement('div');
       cell.textContent = player1.board.board[i][j];
       cell.classList.add('cell');
+
+      cell.dataset.x = i;
+      cell.dataset.y = j;
+
+      cell.addEventListener('click', (e) => {
+        const x = Number(e.target.dataset.x);
+        const y = Number(e.target.dataset.y);
+        player1.board.receiveAttack({ x, y });
+        renderP1Board();
+      });
+
       player1Board.append(cell);
     }
   }
 }
 
 function renderP2Board() {
+  player2Board.textContent = '';
+
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       const cell = document.createElement('div');
       cell.textContent = player2.board.board[i][j];
       cell.classList.add('cell');
+
+      cell.dataset.x = i;
+      cell.dataset.y = j;
+
+      cell.addEventListener('click', (e) => {
+        const x = Number(e.target.dataset.x);
+        const y = Number(e.target.dataset.y);
+        player2.board.receiveAttack({ x, y });
+        renderP2Board();
+      });
+
       player2Board.append(cell);
     }
   }
