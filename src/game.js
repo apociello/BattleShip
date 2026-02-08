@@ -48,7 +48,13 @@ function renderP2Board() {
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       const cell = document.createElement('div');
-      cell.textContent = player2.board.board[i][j];
+
+      if (player2.board.board[i][j] === 'O') {
+        cell.textContent = ' ';
+      } else {
+        cell.textContent = player2.board.board[i][j];
+      }
+
       cell.classList.add('cell');
 
       cell.dataset.x = i;
