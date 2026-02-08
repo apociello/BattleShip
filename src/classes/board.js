@@ -43,7 +43,7 @@ class Board {
       this.board[coordinate.x][coordinate.y] !== ' ' &&
       this.board[coordinate.x][coordinate.y] !== 'O'
     )
-      return;
+      return 0;
 
     for (let i = 0; i < this.ships.length; i++) {
       for (let j = 0; j < this.ships[i].size; j++) {
@@ -53,12 +53,24 @@ class Board {
         ) {
           this.ships[i].hit();
           this.board[coordinate.x][coordinate.y] = 'X';
-          return;
+          return 1;
         }
       }
     }
 
     this.board[coordinate.x][coordinate.y] = '-';
+    return 1;
+  }
+
+  receiveRandAttack() {
+    let result = 0;
+
+    while (!result) {
+      const x = Math.floor(Math.random() * 10);
+      const y = Math.floor(Math.random() * 10);
+
+      result = this.receiveAttack({ x, y });
+    }
   }
 
   allSunk() {
