@@ -39,5 +39,8 @@ main {
   justify-content: center;
   align-items: center;
   border: 1px solid #a0a0a0;
+}
+
+#player2-board .cell {
   cursor: crosshair;
 }
