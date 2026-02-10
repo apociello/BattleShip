@@ -76,12 +76,20 @@ function player1Turn(e) {
   }
 }
 
-function player2Turn() {
+async function player2Turn() {
+  await delay(2000);
   player1.board.receiveRandAttack();
   renderP1Board();
   player2.turn = false;
   player1.turn = true;
 }
+
+function delay(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 
 function game() {
   renderP1Board();
