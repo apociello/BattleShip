@@ -24,7 +24,7 @@ function renderP1Board() {
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       const cell = document.createElement('div');
-      
+
       cell.textContent = player1.board.board[i][j];
       cell.classList.add('cell');
       cell.dataset.x = i;
@@ -53,10 +53,7 @@ function renderP2Board() {
       cell.dataset.y = j;
 
       cell.addEventListener('click', (e) => {
-        const x = Number(e.target.dataset.x);
-        const y = Number(e.target.dataset.y);
-        player2.board.receiveAttack({ x, y });
-        renderP2Board();
+        player1Turn(e);
       });
 
       player2Board.append(cell);
@@ -64,4 +61,32 @@ function renderP2Board() {
   }
 }
 
-export { renderP1Board, renderP2Board };
+function player1Turn(e) {
+  if (player1.turn === false) return;
+
+  const x = Number(e.target.dataset.x);
+  const y = Number(e.target.dataset.y);
+  const validAttack = player2.board.receiveAttack({ x, y });
+
+  if (validAttack) {
+    player1.turn = false;
+    player2.turn = true;
+    renderP2Board();
+    player2Turn();
+  }
+}
+
+function player2Turn() {
+  player1.board.receiveRandAttack();
+  renderP1Board();
+  player2.turn = false;
+  player1.turn = true;
+}
+
+function game() {
+  renderP1Board();
+  renderP2Board();
+  player1.turn = true;
+}
+
+export default game;
