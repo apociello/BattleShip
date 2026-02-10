@@ -3,6 +3,7 @@ import Ship from './classes/ship';
 
 const player1Board = document.getElementById('player1-board');
 const player2Board = document.getElementById('player2-board');
+const status = document.querySelector('.status');
 
 const player1 = new Player();
 player1.board.placeShip(new Ship(5), { x: 0, y: 0 }, 'x'); // Carrier
@@ -77,11 +78,13 @@ function player1Turn(e) {
 }
 
 async function player2Turn() {
+  status.textContent = 'TURN: COMPUTER';
   await delay(2000);
   player1.board.receiveRandAttack();
   renderP1Board();
   player2.turn = false;
   player1.turn = true;
+  status.textContent = 'TURN: PLAYER';
 }
 
 function delay(ms) {
@@ -89,7 +92,6 @@ function delay(ms) {
     setTimeout(resolve, ms);
   });
 }
-
 
 function game() {
   renderP1Board();
