@@ -74,10 +74,13 @@ function player1Turn(e) {
     player2.turn = true;
     renderP2Board();
     player2Turn();
+    checkWinner();
   }
 }
 
 async function player2Turn() {
+  if (player2.turn === false) return;
+
   status.textContent = 'TURN: COMPUTER';
   await delay(2000);
   player1.board.receiveRandAttack();
@@ -85,12 +88,28 @@ async function player2Turn() {
   player2.turn = false;
   player1.turn = true;
   status.textContent = 'TURN: PLAYER';
+  checkWinner();
 }
 
 function delay(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
+}
+
+function checkWinner() {
+  const p1Lose = player1.board.allSunk();
+  const p2Lose = player2.board.allSunk();
+  if (p1Lose || p2Lose) {
+    player1.turn = false;
+    player2.turn = false;
+
+    if (p1Lose) {
+      status.textContent = 'COMPUTER WINS!';
+    } else {
+      status.textContent = 'PLAYER WINS!';
+    }
+  }
 }
 
 function game() {
