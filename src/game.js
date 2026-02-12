@@ -26,7 +26,20 @@ function renderP1Board() {
     for (let j = 0; j < 10; j++) {
       const cell = document.createElement('div');
 
-      cell.textContent = player1.board.board[i][j];
+      switch (player1.board.board[i][j]) {
+        case 'O':
+          cell.style.backgroundColor = 'rgb(252, 252, 252)';
+          break;
+        case 'X':
+          cell.style.backgroundColor = 'rgb(138, 0, 0)';
+          break;
+        case '-':
+          cell.style.backgroundColor = 'rgb(24, 31, 54)';
+          break;
+        default:
+          cell.style.backgroundColor = 'rgb(39, 50, 82)';
+      }
+
       cell.classList.add('cell');
       cell.dataset.x = i;
       cell.dataset.y = j;
@@ -43,10 +56,15 @@ function renderP2Board() {
     for (let j = 0; j < 10; j++) {
       const cell = document.createElement('div');
 
-      if (player2.board.board[i][j] === 'O') {
-        cell.textContent = ' ';
-      } else {
-        cell.textContent = player2.board.board[i][j];
+      switch (player2.board.board[i][j]) {
+        case 'X':
+          cell.style.backgroundColor = 'rgb(138, 0, 0)';
+          break;
+        case '-':
+          cell.style.backgroundColor = 'rgb(24, 31, 54)';
+          break;
+        default:
+          cell.style.backgroundColor = 'rgb(39, 50, 82)';
       }
 
       cell.classList.add('cell');
@@ -82,7 +100,7 @@ async function player2Turn() {
   if (player2.turn === false) return;
 
   status.textContent = 'TURN: COMPUTER';
-  await delay(2000);
+  await delay(200);
   player1.board.receiveRandAttack();
   renderP1Board();
   player2.turn = false;

@@ -37,7 +37,7 @@ main {
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   background-color: rgb(39, 50, 82);
-  border: 4px solid rgb(92, 104, 135);
+  outline: 4px solid rgb(92, 104, 135);
   border-radius: 3px;
 }
 
@@ -45,7 +45,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid rgb(92, 104, 135);
+  outline: 1px solid rgb(92, 104, 135);
   color: white;
 }
 
