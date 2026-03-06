@@ -38,6 +38,7 @@ function renderP1Board() {
           break;
         default:
           cell.style.backgroundColor = 'rgb(39, 50, 82)';
+          break;
       }
 
       cell.classList.add('cell');
@@ -65,6 +66,7 @@ function renderP2Board() {
           break;
         default:
           cell.style.backgroundColor = 'rgb(39, 50, 82)';
+          break;
       }
 
       cell.classList.add('cell');
@@ -91,8 +93,8 @@ function player1Turn(e) {
     player1.turn = false;
     player2.turn = true;
     renderP2Board();
-    player2Turn();
     checkWinner();
+    player2Turn();
   }
 }
 
@@ -116,16 +118,17 @@ function delay(ms) {
 }
 
 function checkWinner() {
-  const p1Lose = player1.board.allSunk();
-  const p2Lose = player2.board.allSunk();
-  if (p1Lose || p2Lose) {
+  const p1Win = player2.board.allSunk();
+  const p2Win = player1.board.allSunk();
+  
+  if (p1Win || p2Win) {
     player1.turn = false;
     player2.turn = false;
 
-    if (p1Lose) {
-      status.textContent = 'COMPUTER WINS!';
-    } else {
+    if (p1Win) {
       status.textContent = 'PLAYER WINS!';
+    } else {
+      status.textContent = 'COMPUTER WINS!';
     }
   }
 }
