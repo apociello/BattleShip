@@ -142,6 +142,16 @@ describe('Board', () => {
       expect(board.board[0][0]).toBe('X');
       expect(board.board[7][8]).toBe('-');
     });
+
+    test('board records sunk ship', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 0, y: 0 }, 'x');
+      board.receiveAttack({ x: 0, y: 0 });
+      board.receiveAttack({ x: 0, y: 1 });
+      expect(board.board[0][0]).toBe('*');
+      expect(board.board[0][0]).toBe('*');
+    })
   });
 
   describe('allSunk', () => {
