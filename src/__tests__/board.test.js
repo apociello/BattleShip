@@ -151,7 +151,41 @@ describe('Board', () => {
       board.receiveAttack({ x: 0, y: 1 });
       expect(board.board[0][0]).toBe('*');
       expect(board.board[0][0]).toBe('*');
+    });
+
+    test('invalid shot returns 0', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 0, y: 0 }, 'x');
+      board.receiveAttack({ x: 0, y: 0 });
+      const result = board.receiveAttack({ x: 0, y: 0 });
+      expect(result).toBe(0);
+    });
+
+    test('invalid shot returns 0', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 0, y: 0 }, 'x');
+      board.receiveAttack({ x: 0, y: 0 });
+      const result = board.receiveAttack({ x: 0, y: 0 });
+      expect(result).toBe(0);
     })
+
+    test('missed shot returns 1', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 0, y: 0 }, 'x');
+      const result = board.receiveAttack({ x: 5, y: 5 });
+      expect(result).toBe(1);
+    });
+
+    test('hit returns 2', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 0, y: 0 }, 'x');
+      const result = board.receiveAttack({ x: 0, y: 0 });
+      expect(result).toBe(2);
+    });
   });
 
   describe('allSunk', () => {
