@@ -28,19 +28,22 @@ function renderP1Board() {
 
       switch (player1.board.board[i][j]) {
         case 'O':
-          cell.style.backgroundColor = 'rgb(33, 45, 177)';
+          cell.style.backgroundColor = 'rgb(69 85 108)';
           break;
         case 'X':
-          cell.style.backgroundColor = 'rgb(209, 47, 47)';
+          cell.style.backgroundColor = 'rgb(138, 0, 0)';
           break;
         case '*':
           cell.style.backgroundColor = 'rgb(138, 0, 0)';
+          cell.style.color = 'rgb(209, 47, 47)';
+          cell.textContent = '✖';
           break;
         case '-':
-          cell.style.backgroundColor = 'rgb(24, 31, 54)';
+          cell.style.backgroundColor = 'rgb(15 23 43)';
+          cell.textContent = '•';
           break;
         default:
-          cell.style.backgroundColor = 'rgb(39, 50, 82)';
+          cell.style.backgroundColor = 'rgb(29 41 61)';
           break;
       }
 
@@ -62,16 +65,19 @@ function renderP2Board() {
 
       switch (player2.board.board[i][j]) {
         case 'X':
-          cell.style.backgroundColor = 'rgb(209, 47, 47)';
+          cell.style.backgroundColor = 'rgb(138, 0, 0)';
           break;
         case '*':
           cell.style.backgroundColor = 'rgb(138, 0, 0)';
+          cell.style.color = 'rgb(209, 47, 47)';
+          cell.textContent = '✖';
           break;
         case '-':
-          cell.style.backgroundColor = 'rgb(24, 31, 54)';
+          cell.style.backgroundColor = 'rgb(15 23 43)';
+          cell.textContent = '•';
           break;
         default:
-          cell.style.backgroundColor = 'rgb(39, 50, 82)';
+          cell.style.backgroundColor = 'rgb(29 41 61)';
           break;
       }
 
