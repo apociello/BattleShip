@@ -52,7 +52,17 @@ class Board {
           coordinate.y === this.ships[i].coordinates[j].y
         ) {
           this.ships[i].hit();
-          this.board[coordinate.x][coordinate.y] = 'X';
+
+          if (this.ships[i].isSunk()) {
+            for (let s = 0; s < this.ships[i].size; s++) {
+              const sunkX = this.ships[i].coordinates[s].x;
+              const sunkY = this.ships[i].coordinates[s].y;
+
+              this.board[sunkX][sunkY] = '*'
+            }
+          } else {
+            this.board[coordinate.x][coordinate.y] = 'X';
+          }
           return 1;
         }
       }

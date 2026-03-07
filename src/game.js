@@ -28,9 +28,12 @@ function renderP1Board() {
 
       switch (player1.board.board[i][j]) {
         case 'O':
-          cell.style.backgroundColor = 'rgb(252, 252, 252)';
+          cell.style.backgroundColor = 'rgb(33, 45, 177)';
           break;
         case 'X':
+          cell.style.backgroundColor = 'rgb(209, 47, 47)';
+          break;
+        case '*':
           cell.style.backgroundColor = 'rgb(138, 0, 0)';
           break;
         case '-':
@@ -59,6 +62,9 @@ function renderP2Board() {
 
       switch (player2.board.board[i][j]) {
         case 'X':
+          cell.style.backgroundColor = 'rgb(209, 47, 47)';
+          break;
+        case '*':
           cell.style.backgroundColor = 'rgb(138, 0, 0)';
           break;
         case '-':
