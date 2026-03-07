@@ -169,7 +169,7 @@ describe('Board', () => {
       board.receiveAttack({ x: 0, y: 0 });
       const result = board.receiveAttack({ x: 0, y: 0 });
       expect(result).toBe(0);
-    })
+    });
 
     test('missed shot returns 1', () => {
       const board = new Board();

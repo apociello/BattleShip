@@ -99,14 +99,17 @@ function player1Turn(e) {
 
   const x = Number(e.target.dataset.x);
   const y = Number(e.target.dataset.y);
-  const validAttack = player2.board.receiveAttack({ x, y });
+  const resultAttack = player2.board.receiveAttack({ x, y });
 
-  if (validAttack) {
+  if (resultAttack === 1) {
     player1.turn = false;
     player2.turn = true;
     renderP2Board();
     checkWinner();
     player2Turn();
+  } else if (resultAttack === 2) {
+    renderP2Board();
+    checkWinner();
   }
 }
 
@@ -114,13 +117,18 @@ async function player2Turn() {
   if (player2.turn === false) return;
 
   status.textContent = 'TURN: COMPUTER';
-  await delay(200);
-  player1.board.receiveRandAttack();
+  await delay(1000);
+  const result = player1.board.receiveRandAttack();
   renderP1Board();
-  player2.turn = false;
-  player1.turn = true;
-  status.textContent = 'TURN: PLAYER';
   checkWinner();
+
+  if (result === 1) {
+    player2.turn = false;
+    player1.turn = true;
+    status.textContent = 'TURN: PLAYER';
+  } else if (result === 2) {
+    player2Turn();
+  }
 }
 
 function delay(ms) {
@@ -132,7 +140,7 @@ function delay(ms) {
 function checkWinner() {
   const p1Win = player2.board.allSunk();
   const p2Win = player1.board.allSunk();
-  
+
   if (p1Win || p2Win) {
     player1.turn = false;
     player2.turn = false;

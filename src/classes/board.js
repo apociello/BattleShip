@@ -43,7 +43,7 @@ class Board {
       this.board[coordinate.x][coordinate.y] !== ' ' &&
       this.board[coordinate.x][coordinate.y] !== 'O'
     )
-      return 0;
+      return 0; // Invalid attack
 
     for (let i = 0; i < this.ships.length; i++) {
       for (let j = 0; j < this.ships[i].size; j++) {
@@ -63,13 +63,13 @@ class Board {
           } else {
             this.board[coordinate.x][coordinate.y] = 'X';
           }
-          return 1;
+          return 2; // Hit (maintain turn)
         }
       }
     }
 
     this.board[coordinate.x][coordinate.y] = '-';
-    return 1;
+    return 1; // Miss (change turn)
   }
 
   receiveRandAttack() {
@@ -81,6 +81,8 @@ class Board {
 
       result = this.receiveAttack({ x, y });
     }
+
+    return result;
   }
 
   allSunk() {
