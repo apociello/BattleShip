@@ -1,9 +1,9 @@
 @font-face {
-  font-display: swap; 
+  font-display: swap;
   font-family: 'Orbitron';
   font-style: normal;
   font-weight: 400;
-  src: url('./fonts/orbitron-v35-latin-regular.woff2') format('woff2'); 
+  src: url('./fonts/orbitron-v35-latin-regular.woff2') format('woff2');
 }
 
 * {
@@ -35,7 +35,6 @@ h1,
 .status {
   color: white;
   font-family: 'Orbitron';
-  
 }
 
 main {
@@ -54,6 +53,7 @@ main {
   background-color: rgb(2 6 24);
   border: 2px solid rgb(52, 60, 79);
   border-radius: 5px;
+  user-select: none;
 }
 
 .cell {
@@ -64,6 +64,29 @@ main {
   color: rgb(92, 104, 135);
 }
 
-#player2-board .cell {
+.virgin {
+  background-color: rgb(29 41 61);
+}
+
+.miss {
+  background-color: rgb(15 23 43);
+}
+
+.hit {
+  background-color: rgb(138, 0, 0);
+  color: rgb(209, 47, 47);
+}
+
+.sunk {
+  background-color: rgb(138, 0, 0);
+  color: rgb(209, 47, 47);
+  border: 1px solid rgb(255, 0, 0);
+}
+
+#player2-board .cell.virgin {
   cursor: crosshair;
+}
+
+#player2-board .cell.virgin:hover {
+  background-color: rgb(52 60 79);
 }

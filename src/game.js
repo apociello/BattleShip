@@ -31,22 +31,19 @@ function renderP1Board() {
           cell.style.backgroundColor = 'rgb(69 85 108)';
           break;
         case 'X':
-          cell.style.backgroundColor = 'rgb(138, 0, 0)';
-          cell.style.color = 'rgb(209, 47, 47)';
+          cell.classList.add('hit');
           cell.textContent = '✖';
           break;
         case '*':
-          cell.style.backgroundColor = 'rgb(138, 0, 0)';
-          cell.style.color = 'rgb(209, 47, 47)';
-          cell.style.border = '1px solid rgb(255, 0, 0)';
+          cell.classList.add('sunk');
           cell.textContent = '✖';
           break;
         case '-':
-          cell.style.backgroundColor = 'rgb(15 23 43)';
+          cell.classList.add('miss');
           cell.textContent = '•';
           break;
         default:
-          cell.style.backgroundColor = 'rgb(29 41 61)';
+          cell.classList.add('virgin');
           break;
       }
 
@@ -68,22 +65,19 @@ function renderP2Board() {
 
       switch (player2.board.board[i][j]) {
         case 'X':
-          cell.style.backgroundColor = 'rgb(138, 0, 0)';
-          cell.style.color = 'rgb(209, 47, 47)';
+          cell.classList.add('hit');
           cell.textContent = '✖';
           break;
         case '*':
-          cell.style.backgroundColor = 'rgb(138, 0, 0)';
-          cell.style.color = 'rgb(209, 47, 47)';
-          cell.style.border = '1px solid rgb(255, 0, 0)';
+          cell.classList.add('sunk');
           cell.textContent = '✖';
           break;
         case '-':
-          cell.style.backgroundColor = 'rgb(15 23 43)';
+          cell.classList.add('miss');
           cell.textContent = '•';
           break;
         default:
-          cell.style.backgroundColor = 'rgb(29 41 61)';
+          cell.classList.add('virgin');
           break;
       }
 
