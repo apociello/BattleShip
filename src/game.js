@@ -32,10 +32,13 @@ function renderP1Board() {
           break;
         case 'X':
           cell.style.backgroundColor = 'rgb(138, 0, 0)';
+          cell.style.color = 'rgb(209, 47, 47)';
+          cell.textContent = '✖';
           break;
         case '*':
           cell.style.backgroundColor = 'rgb(138, 0, 0)';
           cell.style.color = 'rgb(209, 47, 47)';
+          cell.style.border = '1px solid rgb(255, 0, 0)';
           cell.textContent = '✖';
           break;
         case '-':
@@ -66,10 +69,13 @@ function renderP2Board() {
       switch (player2.board.board[i][j]) {
         case 'X':
           cell.style.backgroundColor = 'rgb(138, 0, 0)';
+          cell.style.color = 'rgb(209, 47, 47)';
+          cell.textContent = '✖';
           break;
         case '*':
           cell.style.backgroundColor = 'rgb(138, 0, 0)';
           cell.style.color = 'rgb(209, 47, 47)';
+          cell.style.border = '1px solid rgb(255, 0, 0)';
           cell.textContent = '✖';
           break;
         case '-':

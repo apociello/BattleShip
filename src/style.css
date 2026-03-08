@@ -36,16 +36,17 @@ main {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  background-color: rgb(39, 50, 82);
-  outline: 4px solid rgb(92, 104, 135);
-  border-radius: 3px;
+  padding: 0.6rem;
+  background-color: rgb(2 6 24);
+  border: 2px solid rgb(52, 60, 79);
+  border-radius: 5px;
 }
 
 .cell {
   display: flex;
   justify-content: center;
   align-items: center;
-  outline: 1px solid rgb(92, 104, 135);
+  border: 0.8px solid rgb(92, 104, 135);
   color: rgb(92, 104, 135);
 }
 
