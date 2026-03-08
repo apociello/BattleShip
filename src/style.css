@@ -1,3 +1,11 @@
+@font-face {
+  font-display: swap; 
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/orbitron-v35-latin-regular.woff2') format('woff2'); 
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -19,9 +27,15 @@ body {
   background-color: rgb(23, 30, 49);
 }
 
+h1 {
+  font-family: 'Orbitron';
+  font-size: 3rem;
+}
 h1,
 .status {
   color: white;
+  font-family: 'Orbitron';
+  
 }
 
 main {
