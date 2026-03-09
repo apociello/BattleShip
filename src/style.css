@@ -52,6 +52,7 @@ main {
   border: 2px solid rgb(52, 60, 79);
   border-radius: 8px;
   user-select: none;
+  transition: opacity 0.2s ease, filter 0.2s ease;
 }
 
 .cell {
@@ -87,4 +88,10 @@ main {
 
 #player2-board .cell.virgin:hover {
   background-color: rgb(52 60 79);
+}
+
+.disabled {
+  pointer-events: none;      
+  opacity: 0.6;              
+  filter: grayscale(60%);   
 }

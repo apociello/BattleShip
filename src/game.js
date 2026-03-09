@@ -115,7 +115,8 @@ function player1Turn(e) {
 
 async function player2Turn() {
   if (player2.turn === false) return;
-
+  player1Board.classList.remove('disabled');
+  player2Board.classList.add('disabled');
   status.textContent = 'TURN: COMPUTER';
   await delay(1000);
   const result = player1.board.receiveRandAttack();
@@ -126,6 +127,8 @@ async function player2Turn() {
     player2.turn = false;
     player1.turn = true;
     status.textContent = 'TURN: PLAYER';
+    player1Board.classList.add('disabled');
+    player2Board.classList.remove('disabled');
   } else if (result === 2) {
     player2Turn();
   }
@@ -144,6 +147,8 @@ function checkWinner() {
   if (p1Win || p2Win) {
     player1.turn = false;
     player2.turn = false;
+    player1Board.classList.add('disabled');
+    player2Board.classList.add('disabled');
 
     if (p1Win) {
       status.textContent = 'PLAYER WINS!';
@@ -157,6 +162,7 @@ function game() {
   renderP1Board();
   renderP2Board();
   player1.turn = true;
+  player1Board.classList.add('disabled');
 }
 
 export default game;
