@@ -153,7 +153,7 @@ describe('Board', () => {
       expect(board.board[0][0]).toBe('*');
     });
 
-    test('invalid shot returns 0', () => {
+    test('repeated shot returns 0', () => {
       const board = new Board();
       const ship1 = new Ship(2);
       board.placeShip(ship1, { x: 0, y: 0 }, 'x');
@@ -162,12 +162,11 @@ describe('Board', () => {
       expect(result).toBe(0);
     });
 
-    test('invalid shot returns 0', () => {
+    test('Out of range shot returns 0', () => {
       const board = new Board();
       const ship1 = new Ship(2);
       board.placeShip(ship1, { x: 0, y: 0 }, 'x');
-      board.receiveAttack({ x: 0, y: 0 });
-      const result = board.receiveAttack({ x: 0, y: 0 });
+      const result = board.receiveAttack({ x: -1, y: 13 });
       expect(result).toBe(0);
     });
 

@@ -40,8 +40,12 @@ class Board {
 
   receiveAttack(coordinate) {
     if (
-      this.board[coordinate.x][coordinate.y] !== ' ' &&
-      this.board[coordinate.x][coordinate.y] !== 'O'
+      coordinate.x < 0 ||
+      coordinate.y < 0 ||
+      coordinate.x > 9 ||
+      coordinate.y > 9 ||
+      (this.board[coordinate.x][coordinate.y] !== ' ' &&
+        this.board[coordinate.x][coordinate.y] !== 'O')
     )
       return 0; // Invalid attack
 
@@ -58,7 +62,7 @@ class Board {
               const sunkX = this.ships[i].coordinates[s].x;
               const sunkY = this.ships[i].coordinates[s].y;
 
-              this.board[sunkX][sunkY] = '*'
+              this.board[sunkX][sunkY] = '*';
             }
           } else {
             this.board[coordinate.x][coordinate.y] = 'X';
