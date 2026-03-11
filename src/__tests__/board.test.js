@@ -97,7 +97,7 @@ describe('Board', () => {
     });
   });
 
-  describe('recieveAttack', () => {
+  describe('receiveAttack', () => {
     test('hit increases 1', () => {
       const board = new Board();
       const ship1 = new Ship(2);
@@ -184,6 +184,100 @@ describe('Board', () => {
       board.placeShip(ship1, { x: 0, y: 0 }, 'x');
       const result = board.receiveAttack({ x: 0, y: 0 });
       expect(result).toBe(2);
+    });
+
+    test('Sunk ship returns 3', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 0, y: 0 }, 'x');
+      board.receiveAttack({ x: 0, y: 0 });
+      const result = board.receiveAttack({ x: 0, y: 1 });
+      expect(result).toBe(3);
+    });
+  });
+
+  describe('receiveCleverAttack', () => {
+    test('calls receiveRandAttack only if no pending ships (hit & not sunk)', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      board.placeShip(ship1, { x: 0, y: 0 }, 'x');
+
+      const spy = jest.spyOn(board, 'receiveRandAttack');
+      board.receiveCleverAttack();
+      expect(spy).toHaveBeenCalled();
+
+      spy.mockClear();
+      board.receiveAttack({ x: 0, y: 0 });
+      board.receiveCleverAttack();
+      expect(spy).not.toHaveBeenCalled();
+    });
+
+    test('attacks around a single hit', () => {
+      const board = new Board();
+      const ship = new Ship(2);
+      board.placeShip(ship, { x: 1, y: 1 }, 'x');
+      board.receiveAttack({ x: 1, y: 1 });
+      const spy = jest.spyOn(board, 'receiveAttack');
+      board.receiveCleverAttack();
+
+      const lastCallArg = spy.mock.calls[0][0];
+
+      const validAdjacents = [
+        { x: 0, y: 1 },
+        { x: 2, y: 1 },
+        { x: 1, y: 0 },
+        { x: 1, y: 2 },
+      ];
+
+      expect(validAdjacents).toContainEqual(lastCallArg);
+
+      spy.mockRestore();
+    });
+
+    test('attacks along X axis with more than one hit', () => {
+      const board = new Board();
+      const ship = new Ship(3);
+      board.placeShip(ship, { x: 4, y: 3 }, 'x');
+
+      board.receiveAttack({ x: 4, y: 3 });
+      board.receiveAttack({ x: 4, y: 4 });
+
+      const spy = jest.spyOn(board, 'receiveAttack');
+      board.receiveCleverAttack();
+
+      const lastCallArg = spy.mock.calls[0][0];
+
+      const validAlongX = [
+        { x: 4, y: 2 },
+        { x: 4, y: 5 },
+      ];
+
+      expect(validAlongX).toContainEqual(lastCallArg);
+
+      spy.mockRestore();
+    });
+
+    test('attacks along Y axis with more than one hit', () => {
+      const board = new Board();
+      const ship = new Ship(3);
+      board.placeShip(ship, { x: 3, y: 4 }, 'y');
+
+      board.receiveAttack({ x: 3, y: 4 });
+      board.receiveAttack({ x: 2, y: 4 });
+
+      const spy = jest.spyOn(board, 'receiveAttack');
+      board.receiveCleverAttack();
+
+      const lastCallArg = spy.mock.calls[0][0];
+
+      const validAlongY = [
+        { x: 1, y: 4 },
+        { x: 4, y: 4 },
+      ];
+
+      expect(validAlongY).toContainEqual(lastCallArg);
+
+      spy.mockRestore();
     });
   });
 
