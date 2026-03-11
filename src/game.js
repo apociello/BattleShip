@@ -107,7 +107,7 @@ function player1Turn(e) {
     renderP2Board();
     checkWinner();
     player2Turn();
-  } else if (resultAttack === 2) {
+  } else if (resultAttack === 2 || resultAttack === 3) {
     renderP2Board();
     checkWinner();
   }
@@ -119,7 +119,7 @@ async function player2Turn() {
   player2Board.classList.add('disabled');
   status.textContent = 'TURN: COMPUTER';
   await delay(1000);
-  const result = player1.board.receiveRandAttack();
+  const result = player1.board.receiveCleverAttack();
   renderP1Board();
   checkWinner();
 
@@ -129,7 +129,7 @@ async function player2Turn() {
     status.textContent = 'TURN: PLAYER';
     player1Board.classList.add('disabled');
     player2Board.classList.remove('disabled');
-  } else if (result === 2) {
+  } else if (result === 2 || result === 3) {
     player2Turn();
   }
 }
