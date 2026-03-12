@@ -40,7 +40,7 @@ describe('Board', () => {
       const board = new Board();
       board.placeShip(new Ship(2), { x: 4, y: 7 }, 'y');
       expect(board.board[4][7]).toBe('O');
-      expect(board.board[3][7]).toBe('O');
+      expect(board.board[5][7]).toBe('O');
     });
 
     test('ship is totally placed out of limit', () => {
@@ -65,9 +65,9 @@ describe('Board', () => {
 
     test('ship is partially placed out of limit(north)', () => {
       const board = new Board();
-      board.placeShip(new Ship(2), { x: 0, y: 2 }, 'y');
-      expect(board.board[0][2]).toBe(' ');
+      board.placeShip(new Ship(2), { x: -1, y: 2 }, 'y');
       expect(board.board[-1]).toBe(undefined);
+      expect(board.board[0][2]).toBe(' ');
     });
 
     test('ship is partially placed out of limit(south)', () => {
@@ -80,20 +80,20 @@ describe('Board', () => {
     test('ships are correctly placed', () => {
       const board = new Board();
       board.placeShip(new Ship(2), { x: 7, y: 3 }, 'x');
-      board.placeShip(new Ship(2), { x: 9, y: 7 }, 'y');
+      board.placeShip(new Ship(2), { x: 8, y: 7 }, 'y');
       expect(board.board[7][3]).toBe('O');
       expect(board.board[7][4]).toBe('O');
-      expect(board.board[9][7]).toBe('O');
       expect(board.board[8][7]).toBe('O');
+      expect(board.board[9][7]).toBe('O');
     });
 
     test("ships don't overlap", () => {
       const board = new Board();
       board.placeShip(new Ship(2), { x: 1, y: 2 }, 'x');
-      board.placeShip(new Ship(2), { x: 2, y: 3 }, 'y');
+      board.placeShip(new Ship(2), { x: 0, y: 3 }, 'y');
       expect(board.board[1][2]).toBe('O');
       expect(board.board[1][3]).toBe('O');
-      expect(board.board[2][3]).toBe(' ');
+      expect(board.board[0][3]).toBe(' ');
     });
   });
 
@@ -117,7 +117,7 @@ describe('Board', () => {
     test('2 hits and 1 miss increase 2', () => {
       const board = new Board();
       const ship1 = new Ship(4);
-      board.placeShip(ship1, { x: 9, y: 7 }, 'y');
+      board.placeShip(ship1, { x: 6, y: 7 }, 'y');
       board.receiveAttack({ x: 6, y: 7 });
       board.receiveAttack({ x: 4, y: 1 });
       board.receiveAttack({ x: 8, y: 7 });
@@ -263,7 +263,7 @@ describe('Board', () => {
       board.placeShip(ship, { x: 3, y: 4 }, 'y');
 
       board.receiveAttack({ x: 3, y: 4 });
-      board.receiveAttack({ x: 2, y: 4 });
+      board.receiveAttack({ x: 4, y: 4 });
 
       const spy = jest.spyOn(board, 'receiveAttack');
       board.receiveCleverAttack();
@@ -271,8 +271,8 @@ describe('Board', () => {
       const lastCallArg = spy.mock.calls[0][0];
 
       const validAlongY = [
-        { x: 1, y: 4 },
-        { x: 4, y: 4 },
+        { x: 2, y: 4 },
+        { x: 5, y: 4 },
       ];
 
       expect(validAlongY).toContainEqual(lastCallArg);
@@ -291,8 +291,8 @@ describe('Board', () => {
       board.receiveAttack({ x: 0, y: 0 });
       board.receiveAttack({ x: 0, y: 1 });
       board.receiveAttack({ x: 4, y: 0 });
-      board.receiveAttack({ x: 3, y: 0 });
-      board.receiveAttack({ x: 2, y: 0 });
+      board.receiveAttack({ x: 5, y: 0 });
+      board.receiveAttack({ x: 6, y: 0 });
 
       expect(board.allSunk()).toBe(1);
     });
