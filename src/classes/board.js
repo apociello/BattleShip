@@ -15,7 +15,7 @@ class Board {
     )
       return;
     if (axis === 'x' && coordinate.y + (ship.size - 1) > 9) return;
-    if (axis === 'y' && coordinate.x - (ship.size - 1) < 0) return;
+    if (axis === 'y' && coordinate.x + (ship.size - 1) > 9) return;
 
     if (axis === 'x') {
       for (let i = 0; i < ship.size; i++) {
@@ -28,12 +28,12 @@ class Board {
       }
     } else if (axis === 'y') {
       for (let i = 0; i < ship.size; i++) {
-        if (this.board[coordinate.x - i][coordinate.y] === 'O') return;
-        ship.coordinates.push({ x: coordinate.x - i, y: coordinate.y });
+        if (this.board[coordinate.x + i][coordinate.y] === 'O') return;
+        ship.coordinates.push({ x: coordinate.x + i, y: coordinate.y });
       }
 
       for (let i = 0; i < ship.size; i++) {
-        this.board[coordinate.x - i][coordinate.y] = 'O';
+        this.board[coordinate.x + i][coordinate.y] = 'O';
       }
     }
 

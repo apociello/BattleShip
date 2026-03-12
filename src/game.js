@@ -16,13 +16,13 @@ function initGame() {
 
   player1 = new Player();
   player1.board.placeShip(new Ship(5), { x: 0, y: 0 }, 'x'); // Carrier
-  player1.board.placeShip(new Ship(4), { x: 7, y: 7 }, 'y'); // Battleship
+  player1.board.placeShip(new Ship(4), { x: 4, y: 7 }, 'y'); // Battleship
   player1.board.placeShip(new Ship(3), { x: 9, y: 5 }, 'x'); // Crusier
   player1.board.placeShip(new Ship(3), { x: 4, y: 3 }, 'y'); // Submarine
   player1.board.placeShip(new Ship(2), { x: 2, y: 8 }, 'x'); // Destroyer
 
   player2 = new Player();
-  player2.board.placeShip(new Ship(5), { x: 6, y: 9 }, 'y'); // Carrier
+  player2.board.placeShip(new Ship(5), { x: 2, y: 9 }, 'y'); // Carrier
   player2.board.placeShip(new Ship(4), { x: 2, y: 1 }, 'x'); // Battleship
   player2.board.placeShip(new Ship(3), { x: 0, y: 5 }, 'x'); // Crusier
   player2.board.placeShip(new Ship(3), { x: 6, y: 2 }, 'y'); // Submarine
