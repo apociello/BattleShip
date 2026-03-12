@@ -1,23 +1,33 @@
 import Player from './classes/player';
 import Ship from './classes/ship';
 
-const player1Board = document.getElementById('player1-board');
-const player2Board = document.getElementById('player2-board');
-const status = document.querySelector('.status');
+let player1Board, player2Board, player1, player2, status;
 
-const player1 = new Player();
-player1.board.placeShip(new Ship(5), { x: 0, y: 0 }, 'x'); // Carrier
-player1.board.placeShip(new Ship(4), { x: 7, y: 7 }, 'y'); // Battleship
-player1.board.placeShip(new Ship(3), { x: 9, y: 5 }, 'x'); // Crusier
-player1.board.placeShip(new Ship(3), { x: 4, y: 3 }, 'y'); // Submarine
-player1.board.placeShip(new Ship(2), { x: 2, y: 8 }, 'x'); // Destroyer
+function initGame() {
+  const main = document.querySelector('main');
+  status = document.querySelector('.status');
+  player1Board = document.createElement('div');
+  player1Board.id = 'player1-board';
+  player1Board.classList.add('board');
+  player2Board = document.createElement('div');
+  player2Board.id = 'player2-board';
+  player2Board.classList.add('board');
+  main.append(player1Board, player2Board);
 
-const player2 = new Player();
-player2.board.placeShip(new Ship(5), { x: 6, y: 9 }, 'y'); // Carrier
-player2.board.placeShip(new Ship(4), { x: 2, y: 1 }, 'x'); // Battleship
-player2.board.placeShip(new Ship(3), { x: 0, y: 5 }, 'x'); // Crusier
-player2.board.placeShip(new Ship(3), { x: 6, y: 2 }, 'y'); // Submarine
-player2.board.placeShip(new Ship(2), { x: 8, y: 4 }, 'x'); // Destroyer
+  player1 = new Player();
+  player1.board.placeShip(new Ship(5), { x: 0, y: 0 }, 'x'); // Carrier
+  player1.board.placeShip(new Ship(4), { x: 7, y: 7 }, 'y'); // Battleship
+  player1.board.placeShip(new Ship(3), { x: 9, y: 5 }, 'x'); // Crusier
+  player1.board.placeShip(new Ship(3), { x: 4, y: 3 }, 'y'); // Submarine
+  player1.board.placeShip(new Ship(2), { x: 2, y: 8 }, 'x'); // Destroyer
+
+  player2 = new Player();
+  player2.board.placeShip(new Ship(5), { x: 6, y: 9 }, 'y'); // Carrier
+  player2.board.placeShip(new Ship(4), { x: 2, y: 1 }, 'x'); // Battleship
+  player2.board.placeShip(new Ship(3), { x: 0, y: 5 }, 'x'); // Crusier
+  player2.board.placeShip(new Ship(3), { x: 6, y: 2 }, 'y'); // Submarine
+  player2.board.placeShip(new Ship(2), { x: 8, y: 4 }, 'x'); // Destroyer
+}
 
 function renderP1Board() {
   player1Board.textContent = '';
@@ -159,9 +169,11 @@ function checkWinner() {
 }
 
 function game() {
+  initGame();
   renderP1Board();
   renderP2Board();
   player1.turn = true;
+  status.textContent = 'TURN: PLAYER';
   player1Board.classList.add('disabled');
 }
 
