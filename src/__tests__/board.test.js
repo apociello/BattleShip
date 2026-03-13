@@ -95,6 +95,100 @@ describe('Board', () => {
       expect(board.board[1][3]).toBe('O');
       expect(board.board[0][3]).toBe(' ');
     });
+
+    test('ships keep a min 1 cell distance (X axis)', () =>{
+      const board = new Board();
+      board.placeShip(new Ship(2), { x: 5, y: 5 }, 'x');
+      expect(board.board[5][5]).toBe('O');
+      expect(board.board[5][6]).toBe('O');
+
+      // NORTH
+      board.placeShip(new Ship(2), { x: 4, y: 5 }, 'x');
+      expect(board.board[4][5]).toBe(' ');
+      expect(board.board[4][6]).toBe(' ');
+      
+      // NORTH-EAST
+      board.placeShip(new Ship(2), { x: 4, y: 7 }, 'x');
+      expect(board.board[4][7]).toBe(' ');
+      expect(board.board[4][8]).toBe(' ');
+
+      // EAST
+      board.placeShip(new Ship(2), { x: 5, y: 7 }, 'x'); 
+      expect(board.board[5][7]).toBe(' '); 
+      expect(board.board[5][8]).toBe(' ');
+
+      // SOUTH-EAST
+      board.placeShip(new Ship(2), { x: 6, y: 7 }, 'x'); 
+      expect(board.board[6][7]).toBe(' '); 
+      expect(board.board[6][8]).toBe(' ');
+
+      // SOUTH 
+      board.placeShip(new Ship(2), { x: 6, y: 5 }, 'x'); 
+      expect(board.board[6][5]).toBe(' '); 
+      expect(board.board[6][6]).toBe(' ');
+
+      // SOUTH-WEST
+      board.placeShip(new Ship(2), { x: 6, y: 3 }, 'x'); 
+      expect(board.board[6][3]).toBe(' '); 
+      expect(board.board[6][4]).toBe(' ');
+
+      // WEST 
+      board.placeShip(new Ship(2), { x: 5, y: 3 }, 'x'); 
+      expect(board.board[5][3]).toBe(' '); 
+      expect(board.board[5][4]).toBe(' ');
+
+      // NORTH-WEST
+      board.placeShip(new Ship(2), { x: 4, y: 3 }, 'x'); 
+      expect(board.board[4][3]).toBe(' '); 
+      expect(board.board[4][4]).toBe(' ');
+    });
+
+    test('ships keep a min 1 cell distance (Y axis)', () => {
+      const board = new Board();
+      board.placeShip(new Ship(2), { x: 5, y: 5 }, 'y');
+      expect(board.board[5][5]).toBe('O');
+      expect(board.board[6][5]).toBe('O');
+
+      // NORTH
+      board.placeShip(new Ship(2), { x: 3, y: 5 }, 'y');
+      expect(board.board[3][5]).toBe(' ');
+      expect(board.board[4][5]).toBe(' ');
+
+      // NORTH-EAST
+      board.placeShip(new Ship(2), { x: 3, y: 6 }, 'y');
+      expect(board.board[3][6]).toBe(' ');
+      expect(board.board[4][6]).toBe(' ');
+
+      // EAST
+      board.placeShip(new Ship(2), { x: 5, y: 6 }, 'y');
+      expect(board.board[5][6]).toBe(' ');
+      expect(board.board[6][6]).toBe(' ');
+
+      // SOUTH-EAST
+      board.placeShip(new Ship(2), { x: 7, y: 6 }, 'y');
+      expect(board.board[7][6]).toBe(' ');
+      expect(board.board[8][6]).toBe(' ');
+
+      // SOUTH
+      board.placeShip(new Ship(2), { x: 7, y: 5 }, 'y');
+      expect(board.board[7][5]).toBe(' ');
+      expect(board.board[8][5]).toBe(' ');
+
+      // SOUTH-WEST
+      board.placeShip(new Ship(2), { x: 7, y: 4 }, 'y');
+      expect(board.board[7][4]).toBe(' ');
+      expect(board.board[8][4]).toBe(' ');
+
+      // WEST
+      board.placeShip(new Ship(2), { x: 5, y: 4 }, 'y');
+      expect(board.board[5][4]).toBe(' ');
+      expect(board.board[6][4]).toBe(' ');
+
+      // NORTH-WEST
+      board.placeShip(new Ship(2), { x: 3, y: 4 }, 'y');
+      expect(board.board[3][4]).toBe(' ');
+      expect(board.board[4][4]).toBe(' ');
+    });
   });
 
   describe('receiveAttack', () => {
