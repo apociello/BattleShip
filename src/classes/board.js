@@ -16,10 +16,79 @@ class Board {
       return;
     if (axis === 'x' && coordinate.y + (ship.size - 1) > 9) return;
     if (axis === 'y' && coordinate.x + (ship.size - 1) > 9) return;
+    if (this.board[coordinate.x][coordinate.y] === 'O') return
 
     if (axis === 'x') {
       for (let i = 0; i < ship.size; i++) {
-        if (this.board[coordinate.x][coordinate.y + i] === 'O') return;
+        if (i === 0) {
+          if (
+            (
+              // NORTH
+              coordinate.x > 0 &&
+              this.board[coordinate.x - 1][coordinate.y] === 'O') ||
+            (
+              // EAST
+              coordinate.y < 9 &&
+              this.board[coordinate.x][coordinate.y + 1] === 'O') ||
+            (
+              // SOUTH
+              coordinate.x < 9 &&
+              this.board[coordinate.x + 1][coordinate.y] === 'O') ||
+              (
+              // SOUTH-WEST
+              coordinate.x < 9 &&
+              coordinate.y > 0 &&
+              this.board[coordinate.x + 1][coordinate.y - 1] === 'O') ||
+              (
+              // WEST
+              coordinate.y > 0 &&
+              this.board[coordinate.x][coordinate.y - 1] === 'O') ||
+              (
+              // NORTH-WEST
+              coordinate.x > 0 &&
+              coordinate.y > 0 &&
+              this.board[coordinate.x - 1][coordinate.y - 1] === 'O')
+          )
+            return;
+        } else if (i === ship.size - 1) {
+          if (
+            (
+              // NORTH
+              coordinate.x > 0 &&
+              this.board[coordinate.x - 1][coordinate.y + i] === 'O') ||
+            (
+              // NORTH-EAST
+              coordinate.x > 0 &&
+              coordinate.y + i < 9 &&
+              this.board[coordinate.x - 1][coordinate.y + i + 1] === 'O') ||
+            (
+              // EAST
+              coordinate.y + i < 9 &&
+              this.board[coordinate.x][coordinate.y + i + 1] === 'O') ||
+            (
+              // SOUTH-EAST
+              coordinate.x < 9 &&
+              coordinate.y + i < 9 &&
+              this.board[coordinate.x + 1][coordinate.y + i + 1] === 'O') ||
+            (
+              // SOUTH
+              coordinate.x < 9 &&
+              this.board[coordinate.x + 1][coordinate.y + i] === 'O')
+          )
+            return;
+        } else if (i > 0) {
+          if (
+            (
+              // NORTH
+              coordinate.x > 0 &&
+              this.board[coordinate.x - 1][coordinate.y + i] === 'O') ||
+              (
+              // SOUTH
+              coordinate.x < 9 &&
+              this.board[coordinate.x + 1][coordinate.y + i] === 'O')
+          )
+            return;
+        }
       }
 
       for (let i = 0; i < ship.size; i++) {
@@ -28,12 +97,80 @@ class Board {
       }
     } else if (axis === 'y') {
       for (let i = 0; i < ship.size; i++) {
-        if (this.board[coordinate.x + i][coordinate.y] === 'O') return;
-        ship.coordinates.push({ x: coordinate.x + i, y: coordinate.y });
+        if (i === 0) {
+          if (
+            (
+              // NORTH
+              coordinate.x > 0 &&
+              this.board[coordinate.x - 1][coordinate.y] === 'O') ||
+            (
+              // NORTH-EAST
+              coordinate.x > 0 &&
+              coordinate.y + i < 9 &&
+              this.board[coordinate.x - 1][coordinate.y + 1] === 'O') ||
+            (
+              // EAST
+              coordinate.y < 9 &&
+              this.board[coordinate.x][coordinate.y + 1] === 'O') ||
+            (
+              // SOUTH
+              coordinate.x < 9 &&
+              this.board[coordinate.x + 1][coordinate.y] === 'O') ||
+              (
+              // WEST
+              coordinate.y > 0 &&
+              this.board[coordinate.x][coordinate.y - 1] === 'O') ||
+              (
+              // NORTH-WEST
+              coordinate.x > 0 &&
+              coordinate.y > 0 &&
+              this.board[coordinate.x - 1][coordinate.y - 1] === 'O')
+          )
+            return;
+        } else if (i === ship.size - 1) {
+          if (
+            (
+              // EAST
+              coordinate.y < 9 &&
+              this.board[coordinate.x + i][coordinate.y + 1] === 'O') ||
+            (
+              // SOUTH-EAST
+              coordinate.x + i < 9 &&
+              coordinate.y < 9 &&
+              this.board[coordinate.x + i + 1][coordinate.y + 1] === 'O') ||
+            (
+              // SOUTH
+              coordinate.x + i < 9 &&
+              this.board[coordinate.x + i + 1][coordinate.y] === 'O') || 
+              (
+              // SOUTH-WEST
+              coordinate.x + i < 9 &&
+              coordinate.y > 0 &&
+              this.board[coordinate.x + i + 1][coordinate.y - 1] === 'O') || 
+              (
+              // WEST
+              coordinate.y > 0 &&
+              this.board[coordinate.x + i][coordinate.y - 1] === 'O')
+          )
+            return;
+        } else if (i > 0) {
+          if (
+            (
+              // EAST
+              coordinate.y < 9 &&
+              this.board[coordinate.x + i][coordinate.y + 1] === 'O') ||
+              (
+              // WEST
+              coordinate.y > 0 &&
+              this.board[coordinate.x + i][coordinate.y - 1] === 'O')
+          )
+            return;
+        }
       }
 
       for (let i = 0; i < ship.size; i++) {
         this.board[coordinate.x + i][coordinate.y] = 'O';
+        ship.coordinates.push({ x: coordinate.x + i, y: coordinate.y });
       }
     }
 
