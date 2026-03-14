@@ -14,6 +14,20 @@ describe('Board', () => {
   });
 
   describe('placeShip', () => {
+    test('valid ship placement returns 1', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      const result = board.placeShip(ship1, { x: 0, y: 0 }, 'x');
+      expect(result).toBe(1);
+    })
+
+    test('Invalid ship placement returns 0', () => {
+      const board = new Board();
+      const ship1 = new Ship(2);
+      const result = board.placeShip(ship1, { x: -1, y: 0 }, 'x');
+      expect(result).toBe(0);
+    })
+    
     test('coordinate values are passed to ship', () => {
       const board = new Board();
       const ship1 = new Ship(2);
