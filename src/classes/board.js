@@ -13,10 +13,10 @@ class Board {
       coordinate.x > 9 ||
       coordinate.y > 9
     )
-      return;
-    if (axis === 'x' && coordinate.y + (ship.size - 1) > 9) return;
-    if (axis === 'y' && coordinate.x + (ship.size - 1) > 9) return;
-    if (this.board[coordinate.x][coordinate.y] === 'O') return
+      return 0;
+    if (axis === 'x' && coordinate.y + (ship.size - 1) > 9) return 0;
+    if (axis === 'y' && coordinate.x + (ship.size - 1) > 9) return 0;
+    if (this.board[coordinate.x][coordinate.y] === 'O') return 0;
 
     if (axis === 'x') {
       for (let i = 0; i < ship.size; i++) {
@@ -49,7 +49,7 @@ class Board {
               coordinate.y > 0 &&
               this.board[coordinate.x - 1][coordinate.y - 1] === 'O')
           )
-            return;
+            return 0;
         } else if (i === ship.size - 1) {
           if (
             (
@@ -75,7 +75,7 @@ class Board {
               coordinate.x < 9 &&
               this.board[coordinate.x + 1][coordinate.y + i] === 'O')
           )
-            return;
+            return 0;
         } else if (i > 0) {
           if (
             (
@@ -87,7 +87,7 @@ class Board {
               coordinate.x < 9 &&
               this.board[coordinate.x + 1][coordinate.y + i] === 'O')
           )
-            return;
+            return 0;
         }
       }
 
@@ -126,7 +126,7 @@ class Board {
               coordinate.y > 0 &&
               this.board[coordinate.x - 1][coordinate.y - 1] === 'O')
           )
-            return;
+            return 0;
         } else if (i === ship.size - 1) {
           if (
             (
@@ -152,7 +152,7 @@ class Board {
               coordinate.y > 0 &&
               this.board[coordinate.x + i][coordinate.y - 1] === 'O')
           )
-            return;
+            return 0;
         } else if (i > 0) {
           if (
             (
@@ -164,7 +164,7 @@ class Board {
               coordinate.y > 0 &&
               this.board[coordinate.x + i][coordinate.y - 1] === 'O')
           )
-            return;
+            return 0;
         }
       }
 
@@ -175,6 +175,7 @@ class Board {
     }
 
     this.ships.push(ship);
+    return 1;
   }
 
   receiveAttack(coordinate) {
