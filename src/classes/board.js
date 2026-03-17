@@ -163,7 +163,7 @@ class Board {
 
   randomShipPlacement() {
     this.resetBoard();
-    
+
     let i = 0;
     while (i < 5) {
       const randomAxis = Math.floor(Math.random() * 2); // 0=x, 1=y

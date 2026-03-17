@@ -2,19 +2,18 @@ import Player from './classes/player';
 
 let player1Board, player2Board, player1, player2, status;
 
-function initGame() {
+function initGame(player) {
   const main = document.querySelector('main');
-  status = document.querySelector('.status');
-  player1Board = document.createElement('div');
-  player1Board.id = 'player1-board';
-  player1Board.classList.add('board');
+  const body = document.querySelector('body');
+  status = document.createElement('p');
+  status.classList.add('status');
+  player1Board = document.querySelector('#player1-board');
   player2Board = document.createElement('div');
   player2Board.id = 'player2-board';
   player2Board.classList.add('board');
   main.append(player1Board, player2Board);
-
-  player1 = new Player();
-  player1.board.randomShipPlacement();
+  body.append(status);
+  player1 = player;
 
   player2 = new Player();
   player2.board.randomShipPlacement();
@@ -159,8 +158,8 @@ function checkWinner() {
   }
 }
 
-function game() {
-  initGame();
+function game(player) {
+  initGame(player);
   renderP1Board();
   renderP2Board();
   player1.turn = true;
