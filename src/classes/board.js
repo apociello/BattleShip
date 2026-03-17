@@ -1,5 +1,14 @@
+import Ship from './ship';
+
 class Board {
   constructor() {
+    this.board = Array.from({ length: 10 }, () => Array(10).fill(' '));
+    this.ships = [];
+    this.pendingShip = 0;
+    this.lastShipHits = [];
+  }
+
+  resetBoard() {
     this.board = Array.from({ length: 10 }, () => Array(10).fill(' '));
     this.ships = [];
     this.pendingShip = 0;
@@ -22,69 +31,56 @@ class Board {
       for (let i = 0; i < ship.size; i++) {
         if (i === 0) {
           if (
-            (
-              // NORTH
-              coordinate.x > 0 &&
+            // NORTH
+            (coordinate.x > 0 &&
               this.board[coordinate.x - 1][coordinate.y] === 'O') ||
-            (
-              // EAST
-              coordinate.y < 9 &&
+            // EAST
+            (coordinate.y < 9 &&
               this.board[coordinate.x][coordinate.y + 1] === 'O') ||
-            (
-              // SOUTH
-              coordinate.x < 9 &&
+            // SOUTH
+            (coordinate.x < 9 &&
               this.board[coordinate.x + 1][coordinate.y] === 'O') ||
-              (
-              // SOUTH-WEST
-              coordinate.x < 9 &&
+            // SOUTH-WEST
+            (coordinate.x < 9 &&
               coordinate.y > 0 &&
               this.board[coordinate.x + 1][coordinate.y - 1] === 'O') ||
-              (
-              // WEST
-              coordinate.y > 0 &&
+            // WEST
+            (coordinate.y > 0 &&
               this.board[coordinate.x][coordinate.y - 1] === 'O') ||
-              (
-              // NORTH-WEST
-              coordinate.x > 0 &&
+            // NORTH-WEST
+            (coordinate.x > 0 &&
               coordinate.y > 0 &&
               this.board[coordinate.x - 1][coordinate.y - 1] === 'O')
           )
             return 0;
         } else if (i === ship.size - 1) {
           if (
-            (
-              // NORTH
-              coordinate.x > 0 &&
+            // NORTH
+            (coordinate.x > 0 &&
               this.board[coordinate.x - 1][coordinate.y + i] === 'O') ||
-            (
-              // NORTH-EAST
-              coordinate.x > 0 &&
+            // NORTH-EAST
+            (coordinate.x > 0 &&
               coordinate.y + i < 9 &&
               this.board[coordinate.x - 1][coordinate.y + i + 1] === 'O') ||
-            (
-              // EAST
-              coordinate.y + i < 9 &&
+            // EAST
+            (coordinate.y + i < 9 &&
               this.board[coordinate.x][coordinate.y + i + 1] === 'O') ||
-            (
-              // SOUTH-EAST
-              coordinate.x < 9 &&
+            // SOUTH-EAST
+            (coordinate.x < 9 &&
               coordinate.y + i < 9 &&
               this.board[coordinate.x + 1][coordinate.y + i + 1] === 'O') ||
-            (
-              // SOUTH
-              coordinate.x < 9 &&
+            // SOUTH
+            (coordinate.x < 9 &&
               this.board[coordinate.x + 1][coordinate.y + i] === 'O')
           )
             return 0;
         } else if (i > 0) {
           if (
-            (
-              // NORTH
-              coordinate.x > 0 &&
+            // NORTH
+            (coordinate.x > 0 &&
               this.board[coordinate.x - 1][coordinate.y + i] === 'O') ||
-              (
-              // SOUTH
-              coordinate.x < 9 &&
+            // SOUTH
+            (coordinate.x < 9 &&
               this.board[coordinate.x + 1][coordinate.y + i] === 'O')
           )
             return 0;
@@ -99,69 +95,56 @@ class Board {
       for (let i = 0; i < ship.size; i++) {
         if (i === 0) {
           if (
-            (
-              // NORTH
-              coordinate.x > 0 &&
+            // NORTH
+            (coordinate.x > 0 &&
               this.board[coordinate.x - 1][coordinate.y] === 'O') ||
-            (
-              // NORTH-EAST
-              coordinate.x > 0 &&
+            // NORTH-EAST
+            (coordinate.x > 0 &&
               coordinate.y + i < 9 &&
               this.board[coordinate.x - 1][coordinate.y + 1] === 'O') ||
-            (
-              // EAST
-              coordinate.y < 9 &&
+            // EAST
+            (coordinate.y < 9 &&
               this.board[coordinate.x][coordinate.y + 1] === 'O') ||
-            (
-              // SOUTH
-              coordinate.x < 9 &&
+            // SOUTH
+            (coordinate.x < 9 &&
               this.board[coordinate.x + 1][coordinate.y] === 'O') ||
-              (
-              // WEST
-              coordinate.y > 0 &&
+            // WEST
+            (coordinate.y > 0 &&
               this.board[coordinate.x][coordinate.y - 1] === 'O') ||
-              (
-              // NORTH-WEST
-              coordinate.x > 0 &&
+            // NORTH-WEST
+            (coordinate.x > 0 &&
               coordinate.y > 0 &&
               this.board[coordinate.x - 1][coordinate.y - 1] === 'O')
           )
             return 0;
         } else if (i === ship.size - 1) {
           if (
-            (
-              // EAST
-              coordinate.y < 9 &&
+            // EAST
+            (coordinate.y < 9 &&
               this.board[coordinate.x + i][coordinate.y + 1] === 'O') ||
-            (
-              // SOUTH-EAST
-              coordinate.x + i < 9 &&
+            // SOUTH-EAST
+            (coordinate.x + i < 9 &&
               coordinate.y < 9 &&
               this.board[coordinate.x + i + 1][coordinate.y + 1] === 'O') ||
-            (
-              // SOUTH
-              coordinate.x + i < 9 &&
-              this.board[coordinate.x + i + 1][coordinate.y] === 'O') || 
-              (
-              // SOUTH-WEST
-              coordinate.x + i < 9 &&
+            // SOUTH
+            (coordinate.x + i < 9 &&
+              this.board[coordinate.x + i + 1][coordinate.y] === 'O') ||
+            // SOUTH-WEST
+            (coordinate.x + i < 9 &&
               coordinate.y > 0 &&
-              this.board[coordinate.x + i + 1][coordinate.y - 1] === 'O') || 
-              (
-              // WEST
-              coordinate.y > 0 &&
+              this.board[coordinate.x + i + 1][coordinate.y - 1] === 'O') ||
+            // WEST
+            (coordinate.y > 0 &&
               this.board[coordinate.x + i][coordinate.y - 1] === 'O')
           )
             return 0;
         } else if (i > 0) {
           if (
-            (
-              // EAST
-              coordinate.y < 9 &&
+            // EAST
+            (coordinate.y < 9 &&
               this.board[coordinate.x + i][coordinate.y + 1] === 'O') ||
-              (
-              // WEST
-              coordinate.y > 0 &&
+            // WEST
+            (coordinate.y > 0 &&
               this.board[coordinate.x + i][coordinate.y - 1] === 'O')
           )
             return 0;
@@ -176,6 +159,40 @@ class Board {
 
     this.ships.push(ship);
     return 1;
+  }
+
+  randomShipPlacement() {
+    this.resetBoard();
+    
+    let i = 0;
+    while (i < 5) {
+      const randomAxis = Math.floor(Math.random() * 2); // 0=x, 1=y
+      let axis;
+
+      if (randomAxis === 0) {
+        axis = 'x';
+      } else {
+        axis = 'y';
+      }
+
+      const randX = Math.floor(Math.random() * 10);
+      const randY = Math.floor(Math.random() * 10);
+      let valid = 0;
+
+      if (i === 0) {
+        valid = this.placeShip(new Ship(5), { x: randX, y: randY }, axis);
+      } else if (i === 1) {
+        valid = this.placeShip(new Ship(4), { x: randX, y: randY }, axis);
+      } else if (i === 2) {
+        valid = this.placeShip(new Ship(3), { x: randX, y: randY }, axis);
+      } else if (i === 3) {
+        valid = this.placeShip(new Ship(3), { x: randX, y: randY }, axis);
+      } else if (i === 4) {
+        valid = this.placeShip(new Ship(2), { x: randX, y: randY }, axis);
+      }
+
+      if (valid) i++;
+    }
   }
 
   receiveAttack(coordinate) {
