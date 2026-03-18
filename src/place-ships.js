@@ -5,7 +5,9 @@ function placeShips(player1, onConfirm) {
   btnsDiv.classList.add('buttons');
   const randomiseBtn = document.createElement('button');
   randomiseBtn.textContent = 'Randomise';
+  randomiseBtn.classList.add('randomise');
   const confirmBtn = document.createElement('button');
+  confirmBtn.classList.add('confirm');
   confirmBtn.textContent = 'Confirm';
   btnsDiv.append(randomiseBtn, confirmBtn);
   body.append(btnsDiv);
@@ -25,7 +27,7 @@ function placeShips(player1, onConfirm) {
         const cell = document.createElement('div');
         switch (player1.board.board[i][j]) {
           case 'O':
-            cell.style.backgroundColor = 'rgb(69 85 108)';
+            cell.classList.add('place-ship');
             break;
           case 'X':
             cell.classList.add('hit');
@@ -64,7 +66,7 @@ function placeShips(player1, onConfirm) {
       const cell = document.createElement('div');
       switch (player1.board.board[i][j]) {
         case 'O':
-          cell.style.backgroundColor = 'rgb(69 85 108)';
+          cell.classList.add('place-ship');
           break;
         case 'X':
           cell.classList.add('hit');

@@ -28,7 +28,7 @@ function renderP1Board() {
 
       switch (player1.board.board[i][j]) {
         case 'O':
-          cell.style.backgroundColor = 'rgb(69 85 108)';
+          cell.classList.add('ship');
           break;
         case 'X':
           cell.classList.add('hit');

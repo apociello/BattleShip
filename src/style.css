@@ -36,6 +36,10 @@ h1,
   font-family: 'Orbitron';
 }
 
+.status {
+  font-size: 1.2rem;
+}
+
 main {
   display: flex;
   gap: 9rem;
@@ -59,8 +63,18 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 0.8px solid rgb(92, 104, 135);
+  border: 0.9px solid rgb(69 85 108);
   color: rgb(92, 104, 135);
+}
+
+.place-ship {
+  background-color: rgb(0 78 59 / 80%);
+  border: 0.9px solid rgb(0 121 86 / 60%);
+}
+
+.ship {
+  background-color: rgb(69 85 108);
+  border: 0.9px solid rgb(97, 112, 132);
 }
 
 .virgin {
@@ -74,6 +88,7 @@ main {
 .hit {
   background-color: rgb(138, 0, 0);
   color: rgb(209, 47, 47);
+  border: 0.9px solid rgb(173, 36, 36);
 }
 
 .sunk {
@@ -114,5 +129,22 @@ button {
 }
 
 button:hover {
-  background-color: rgb(92, 104, 135);
+  background-color: rgb(65, 74, 97);
+}
+
+button.confirm {
+  background-color: rgb(0 79 59);
+  border: 1px solid rgb(0 122 85);
+}
+
+button.randomise:active {
+  background-color: rgb(79, 87, 107);
+}
+button.confirm:hover {
+  background-color: rgb(9, 93, 68);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+}
+
+button.confirm:active {
+  background-color: rgb(10, 121, 87);
 }
