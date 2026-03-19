@@ -20,7 +20,7 @@ function placeShips(player1, onConfirm) {
   randomiseBtn.addEventListener('click', () => {
     player1.board.resetBoard();
     player1.board.randomShipPlacement();
-    renderP1Board(player1, player1Board);
+    renderP1Board(player1, player1Board, true);
   });
 
   confirmBtn.addEventListener('click', () => {
@@ -28,7 +28,7 @@ function placeShips(player1, onConfirm) {
     btnsDiv.remove();
   });
 
-  renderP1Board(player1, player1Board);
+  renderP1Board(player1, player1Board, true);
 }
 
 export default placeShips;

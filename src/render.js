@@ -1,4 +1,4 @@
-function renderP1Board(player1, player1Board) {
+function renderP1Board(player1, player1Board, placementMode = false) {
   player1Board.textContent = '';
 
   for (let i = 0; i < 10; i++) {
@@ -7,7 +7,7 @@ function renderP1Board(player1, player1Board) {
 
       switch (player1.board.board[i][j]) {
         case 'O':
-          cell.classList.add('ship');
+          cell.classList.add(placementMode ? 'place-ship' : 'ship');
           break;
         case 'X':
           cell.classList.add('hit');
