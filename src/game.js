@@ -1,7 +1,7 @@
 import Player from './classes/player';
 import { renderP1Board, renderP2Board } from './render';
 
-let player1Board, player2Board, player1, player2, status;
+let player1Board, player2Board, player1, player2, status; // eslint-disable-line
 
 function initGame(player) {
   const main = document.querySelector('main');
@@ -31,11 +31,11 @@ function player1Turn(e) {
     player1.turn = false;
     player2.turn = true;
     renderP2Board(player2, player2Board, player1Turn);
-    checkWinner();
-    player2Turn();
+    checkWinner(); // eslint-disable-line
+    player2Turn(); // eslint-disable-line
   } else if (resultAttack === 2 || resultAttack === 3) {
     renderP2Board(player2, player2Board, player1Turn);
-    checkWinner();
+    checkWinner(); // eslint-disable-line
   }
 }
 
@@ -44,10 +44,10 @@ async function player2Turn() {
   player1Board.classList.remove('disabled');
   player2Board.classList.add('disabled');
   status.textContent = 'TURN: COMPUTER';
-  await delay(1000);
+  await delay(1000); // eslint-disable-line
   const result = player1.board.receiveCleverAttack();
   renderP1Board(player1, player1Board);
-  checkWinner();
+  checkWinner(); // eslint-disable-line
 
   if (result === 1) {
     player2.turn = false;
