@@ -1,4 +1,5 @@
 import Player from './classes/player';
+import { renderP1Board, renderP2Board } from './render';
 
 let player1Board, player2Board, player1, player2, status;
 
@@ -19,81 +20,6 @@ function initGame(player) {
   player2.board.randomShipPlacement();
 }
 
-function renderP1Board() {
-  player1Board.textContent = '';
-
-  for (let i = 0; i < 10; i++) {
-    for (let j = 0; j < 10; j++) {
-      const cell = document.createElement('div');
-
-      switch (player1.board.board[i][j]) {
-        case 'O':
-          cell.classList.add('ship');
-          break;
-        case 'X':
-          cell.classList.add('hit');
-          cell.textContent = '✖';
-          break;
-        case '*':
-          cell.classList.add('sunk');
-          cell.textContent = '✖';
-          break;
-        case '-':
-          cell.classList.add('miss');
-          cell.textContent = '•';
-          break;
-        default:
-          cell.classList.add('virgin');
-          break;
-      }
-
-      cell.classList.add('cell');
-      cell.dataset.x = i;
-      cell.dataset.y = j;
-
-      player1Board.append(cell);
-    }
-  }
-}
-
-function renderP2Board() {
-  player2Board.textContent = '';
-
-  for (let i = 0; i < 10; i++) {
-    for (let j = 0; j < 10; j++) {
-      const cell = document.createElement('div');
-
-      switch (player2.board.board[i][j]) {
-        case 'X':
-          cell.classList.add('hit');
-          cell.textContent = '✖';
-          break;
-        case '*':
-          cell.classList.add('sunk');
-          cell.textContent = '✖';
-          break;
-        case '-':
-          cell.classList.add('miss');
-          cell.textContent = '•';
-          break;
-        default:
-          cell.classList.add('virgin');
-          break;
-      }
-
-      cell.classList.add('cell');
-      cell.dataset.x = i;
-      cell.dataset.y = j;
-
-      cell.addEventListener('click', (e) => {
-        player1Turn(e);
-      });
-
-      player2Board.append(cell);
-    }
-  }
-}
-
 function player1Turn(e) {
   if (player1.turn === false) return;
 
@@ -104,11 +30,11 @@ function player1Turn(e) {
   if (resultAttack === 1) {
     player1.turn = false;
     player2.turn = true;
-    renderP2Board();
+    renderP2Board(player2, player2Board, player1Turn);
     checkWinner();
     player2Turn();
   } else if (resultAttack === 2 || resultAttack === 3) {
-    renderP2Board();
+    renderP2Board(player2, player2Board, player1Turn);
     checkWinner();
   }
 }
@@ -120,7 +46,7 @@ async function player2Turn() {
   status.textContent = 'TURN: COMPUTER';
   await delay(1000);
   const result = player1.board.receiveCleverAttack();
-  renderP1Board();
+  renderP1Board(player1, player1Board);
   checkWinner();
 
   if (result === 1) {
@@ -160,8 +86,8 @@ function checkWinner() {
 
 function game(player) {
   initGame(player);
-  renderP1Board();
-  renderP2Board();
+  renderP1Board(player1, player1Board);
+  renderP2Board(player2, player2Board, player1Turn);
   player1.turn = true;
   status.textContent = 'TURN: PLAYER';
   player1Board.classList.add('disabled');
