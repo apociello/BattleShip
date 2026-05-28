@@ -1,2 +1,2 @@
-# Webpack Template
-This is a starter template for Webpack projects, including development/production configurations, HTML, CSS, and ready-to-use NPM scripts.
+# Battleship
+A Battleship game built with JavaScript featuring random ship placement and turn-based gameplay against the computer.
