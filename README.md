@@ -2,7 +2,7 @@
 
 A browser-based Battleship game built with JavaScript and TDD.
 
-🔗 [Live Demo](https://apociello.github.io/BattleShip/)
+🔗 [Live Demo](https://battleship-three-eta.vercel.app/)
 
 ## Features
 
