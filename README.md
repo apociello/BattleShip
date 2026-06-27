@@ -1,2 +1,20 @@
 # Battleship
-A Battleship game built with JavaScript featuring random ship placement and turn-based gameplay against the computer.
+
+A browser-based Battleship game built with JavaScript and TDD.
+
+🔗 [Live Demo](https://apociello.github.io/BattleShip/)
+
+## Features
+
+- Play against the computer with smart attack logic
+- Random ship placement
+- Turn-based gameplay with visual feedback
+- Hit, miss and sunk states rendered on the board
+
+## Built with
+
+- JavaScript
+- HTML & CSS
+- Jest (TDD)
+- Webpack
+- Babel
