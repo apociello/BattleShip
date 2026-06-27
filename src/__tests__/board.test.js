@@ -19,15 +19,15 @@ describe('Board', () => {
       const ship1 = new Ship(2);
       const result = board.placeShip(ship1, { x: 0, y: 0 }, 'x');
       expect(result).toBe(1);
-    })
+    });
 
     test('Invalid ship placement returns 0', () => {
       const board = new Board();
       const ship1 = new Ship(2);
       const result = board.placeShip(ship1, { x: -1, y: 0 }, 'x');
       expect(result).toBe(0);
-    })
-    
+    });
+
     test('coordinate values are passed to ship', () => {
       const board = new Board();
       const ship1 = new Ship(2);
@@ -110,7 +110,7 @@ describe('Board', () => {
       expect(board.board[0][3]).toBe(' ');
     });
 
-    test('ships keep a min 1 cell distance (X axis)', () =>{
+    test('ships keep a min 1 cell distance (X axis)', () => {
       const board = new Board();
       board.placeShip(new Ship(2), { x: 5, y: 5 }, 'x');
       expect(board.board[5][5]).toBe('O');
@@ -120,40 +120,40 @@ describe('Board', () => {
       board.placeShip(new Ship(2), { x: 4, y: 5 }, 'x');
       expect(board.board[4][5]).toBe(' ');
       expect(board.board[4][6]).toBe(' ');
-      
+
       // NORTH-EAST
       board.placeShip(new Ship(2), { x: 4, y: 7 }, 'x');
       expect(board.board[4][7]).toBe(' ');
       expect(board.board[4][8]).toBe(' ');
 
       // EAST
-      board.placeShip(new Ship(2), { x: 5, y: 7 }, 'x'); 
-      expect(board.board[5][7]).toBe(' '); 
+      board.placeShip(new Ship(2), { x: 5, y: 7 }, 'x');
+      expect(board.board[5][7]).toBe(' ');
       expect(board.board[5][8]).toBe(' ');
 
       // SOUTH-EAST
-      board.placeShip(new Ship(2), { x: 6, y: 7 }, 'x'); 
-      expect(board.board[6][7]).toBe(' '); 
+      board.placeShip(new Ship(2), { x: 6, y: 7 }, 'x');
+      expect(board.board[6][7]).toBe(' ');
       expect(board.board[6][8]).toBe(' ');
 
-      // SOUTH 
-      board.placeShip(new Ship(2), { x: 6, y: 5 }, 'x'); 
-      expect(board.board[6][5]).toBe(' '); 
+      // SOUTH
+      board.placeShip(new Ship(2), { x: 6, y: 5 }, 'x');
+      expect(board.board[6][5]).toBe(' ');
       expect(board.board[6][6]).toBe(' ');
 
       // SOUTH-WEST
-      board.placeShip(new Ship(2), { x: 6, y: 3 }, 'x'); 
-      expect(board.board[6][3]).toBe(' '); 
+      board.placeShip(new Ship(2), { x: 6, y: 3 }, 'x');
+      expect(board.board[6][3]).toBe(' ');
       expect(board.board[6][4]).toBe(' ');
 
-      // WEST 
-      board.placeShip(new Ship(2), { x: 5, y: 3 }, 'x'); 
-      expect(board.board[5][3]).toBe(' '); 
+      // WEST
+      board.placeShip(new Ship(2), { x: 5, y: 3 }, 'x');
+      expect(board.board[5][3]).toBe(' ');
       expect(board.board[5][4]).toBe(' ');
 
       // NORTH-WEST
-      board.placeShip(new Ship(2), { x: 4, y: 3 }, 'x'); 
-      expect(board.board[4][3]).toBe(' '); 
+      board.placeShip(new Ship(2), { x: 4, y: 3 }, 'x');
+      expect(board.board[4][3]).toBe(' ');
       expect(board.board[4][4]).toBe(' ');
     });
 

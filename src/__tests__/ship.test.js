@@ -1,18 +1,18 @@
-import Ship from "../classes/ship";
+import Ship from '../classes/ship';
 
-describe("Ship", () => {
-  test("starts with 0 hits", () => {
+describe('Ship', () => {
+  test('starts with 0 hits', () => {
     const ship = new Ship(2);
     expect(ship.hits).toBe(0);
   });
 
-  test("hit increases hits", () => {
+  test('hit increases hits', () => {
     const ship = new Ship(2);
     ship.hit();
     expect(ship.hits).toBe(1);
   });
 
-  test("ship is sunk if hits >= size", () => {
+  test('ship is sunk if hits >= size', () => {
     const ship = new Ship(2);
     ship.hit();
     ship.hit();

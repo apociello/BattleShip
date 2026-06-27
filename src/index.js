@@ -6,7 +6,7 @@ import game from './game';
 const player1 = new Player();
 
 function startGame() {
-    game(player1);
+  game(player1);
 }
 
 placeShips(player1, startGame);
