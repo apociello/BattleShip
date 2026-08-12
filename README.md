@@ -23,8 +23,9 @@ A browser-based Battleship game built with JavaScript and TDD.
 
 ## Built with
 
+- HTML 
+- CSS
 - JavaScript
-- HTML & CSS
 - Jest (TDD)
 - Webpack
 - Babel
